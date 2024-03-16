@@ -16,7 +16,6 @@ use App\Http\Controllers\PostController;
 
 
 Route::get('/', [PostController::class, 'index']);
-
 /**
  * /postsにアクセスした際に呼び出すメソッドを登録している．
  * Route::get()はURLとメソッドを紐付けるための関数．AddListenerのようなもの
@@ -34,4 +33,11 @@ Route::get('/', [PostController::class, 'index']);
  * ちなみに[]なのは，引数が配列で指定されているため
  * stringの配列を引数として渡してる感じかな
  */
+ 
+ 
+ Route::get('/posts/{post}', [PostController::class ,'show']);
+ /**
+  * {}内のルートパラメータは，show関数の引数と同じ名前にする
+  * そうすることで暗黙的に結合することができる
+  */
  ?>

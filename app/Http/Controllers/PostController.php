@@ -26,4 +26,13 @@ class PostController extends Controller
      * 
      * withの部分は，bladeファイルにおいて，postsという変数名で，get()関数で生成したPostクラスのインスタンスを使用できるようにしている
      */
+     
+     
+     /**
+      * この引数$postはルートパラメータのデータと暗黙的に結合されるため，
+      * ルートパラメータで指定したidのインスタンスのみが代入される
+      */
+    public function show(Post $post){
+        return view('posts.show')->with(['post' => $post]);
+    }
 }
