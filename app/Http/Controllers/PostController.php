@@ -13,7 +13,7 @@ class PostController extends Controller
      * @return array Postモデルリスト
      */
     public function index(Post $post){
-        return $post -> get();
+        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
     }
     /**
      *$postへの代入はDIコンテナが，自動的に最適なデータを依存注入してくれる．
@@ -23,5 +23,7 @@ class PostController extends Controller
      * function sum(float $a, float $b): float {
      *      return $a + $b;
      * }
+     * 
+     * withの部分は，bladeファイルにおいて，postsという変数名で，get()関数で生成したPostクラスのインスタンスを使用できるようにしている
      */
 }
