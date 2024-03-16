@@ -15,4 +15,13 @@ class PostController extends Controller
     public function index(Post $post){
         return $post -> get();
     }
+    /**
+     *$postへの代入はDIコンテナが，自動的に最適なデータを依存注入してくれる．
+     * ちなみにphpでは基本的に変数型を明示できない．
+     * ただし引数と戻り値は明示することが可能
+     * 
+     * function sum(float $a, float $b): float {
+     *      return $a + $b;
+     * }
+     */
 }
