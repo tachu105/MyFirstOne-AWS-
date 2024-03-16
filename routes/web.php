@@ -19,14 +19,22 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', [PostController::class, 'index']);
+
 /**
- * /postsにアクセスした際にPostControllerのindexメソッドを呼び出す
+ * /postsにアクセスした際に呼び出すメソッドを登録している．
+ * Route::get()はURLとメソッドを紐付けるための関数．AddListenerのようなもの
+ * 今回は'/posts'というリンクとPostControllerのindexメソッドを結び付けている
+ * 
+ * ちなみにここではRouteクラスはインスタンスを生成せずに，static関数かのように呼び出すことができている．
+ * これはlaravelのファサードという機能でいわゆるDIコンテナ
+ * Unityのzenjectとは若干仕様が異なるらしく，神様が自動的にインスタンスを生成してくれるので，
+ * 静的メソッドのように呼び出すことができる機能らしい
+ * 
+ * PostController::classは完全修飾名（クラスへのフルリンク：App\Http\Controllers\PostController）を文字列として返す書き方
+ * なので，上でuseをせずに
+ * Route::get('/posts', [App\Http\Controllers\PostController, 'index']);
+ * でもよい
+ * ちなみに[]なのは，引数が配列で指定されているため
+ * stringの配列を引数として渡してる感じかな
  */
-// Route::get('/posts', function (Request $request) {
-//     return PostController::index();
-// });
-//意味合い的にはこんな感じ（これだとダメ）だけど，さっきのを使うとLaravalが必要なパラメータとかを
-//自動で渡してくれるので，手動で明記しなくても良く，ミスが減るため，こっちを使うことが推奨．
-
-
-
+ ?>
