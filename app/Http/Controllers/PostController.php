@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -28,6 +29,38 @@ class PostController extends Controller
      */
      
      
+     public function create()
+    {
+        return view('posts.create');
+    }
+    
+    /**
+     * Requestはユーザーからのリクエストデータなどが含まれるインスタンス？
+     * 
+     */
+    public function store(Post $post, PostRequest $request)
+    {
+        $input = $request['post'];  //postはcreate.bladeのnameの部分の名前
+        $post->fill($input)->save();
+        /**
+         * $post->title = $input["title"];
+         * $post->body = $input["body"];
+         * $post->save();
+         * を自動で行ってくれるのがfill関数
+         * ただし，Modelクラスにfillable関数を作って，自動代入ができるパラメータを設定しておく必要がある．
+         * 
+         * ちなみに，fill($input)->save()
+         * をまとめたcreate($input)という関数もある
+         */
+        
+        return redirect('/posts/' . $post->id);
+        /**
+         * save()関数が実行された時点で$postには追加したIDが追加される
+         * idには新たに作成したDBのid番号が保持される？
+         */
+    }
+
+
      /**
       * この引数$postはルートパラメータのデータと暗黙的に結合されるため，
       * ルートパラメータで指定したidのインスタンスのみが代入される

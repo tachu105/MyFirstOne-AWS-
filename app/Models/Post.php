@@ -9,6 +9,14 @@ class Post extends Model
 {
     use HasFactory;
     
+    /**
+     * データ追加時にfill()関数で自動代入できるデータを指定
+     */
+    protected $fillable = [
+        'title',
+        'body',
+    ];
+    
     public function getByLimit(int $limit_count = 10)
     {
         // updated_atで降順に並べたあと、limitで件数制限をかける

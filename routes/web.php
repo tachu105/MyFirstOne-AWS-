@@ -34,6 +34,17 @@ Route::get('/', [PostController::class, 'index']);
  * stringの配列を引数として渡してる感じかな
  */
  
+ /**
+  * 新たな投稿の作成後に呼び出されるリンク
+  */
+ Route::post('/posts', [PostController::class, 'store']);
+      
+ /**
+  * 新たな投稿を作成するページの呼び出し
+  * ルートパラメータの呼び出しより上に記述する
+  */
+ Route::get('/posts/create', [PostController::class, 'create']);
+     
  
  Route::get('/posts/{post}', [PostController::class ,'show']);
  /**
