@@ -44,11 +44,25 @@ Route::get('/', [PostController::class, 'index']);
   * ルートパラメータの呼び出しより上に記述する
   */
  Route::get('/posts/create', [PostController::class, 'create']);
+ 
+ 
+ /**
+  * 投稿の編集用URL取得時の呼び出し
+  */
+ Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
      
  
- Route::get('/posts/{post}', [PostController::class ,'show']);
+ /**
+  * 各投稿ページの表示関数呼び出し
+  */
+ Route::get('/posts/{post}', [PostController::class, 'show']);
  /**
   * {}内のルートパラメータは，show関数の引数と同じ名前にする
   * そうすることで暗黙的に結合することができる
   */
+  
+  /**
+   * 更新処理をする関数の呼び出し
+   */
+  Route::put('/posts/{post}', [PostController::class, 'update']);
  ?>

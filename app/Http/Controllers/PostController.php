@@ -36,7 +36,7 @@ class PostController extends Controller
     
     /**
      * Requestはユーザーからのリクエストデータなどが含まれるインスタンス？
-     * 
+     * Post $postの引数名はweb.php(viewクラス)のURLの{}内の名前と同じにする
      */
     public function store(Post $post, PostRequest $request)
     {
@@ -53,11 +53,31 @@ class PostController extends Controller
          * をまとめたcreate($input)という関数もある
          */
         
-        return redirect('/posts/' . $post->id);
+        return redirect('/posts/' . $post->id); //redirectはlaravelの関数
         /**
          * save()関数が実行された時点で$postには追加したIDが追加される
          * idには新たに作成したDBのid番号が保持される？
          */
+    }
+    
+    /**
+     * 記事更新ボタンが押されたときの挙動
+     */
+    public function update(PostRequest $request, Post $post)//ROute::putでURLの記事番号を指定しているので，更新したい記事のクラスインスタンスのみが送られてくる
+    {
+        $input_post = $request['post'];//postはedit.bladeのnameの部分の名前
+        $post->fill($input_post)->save();
+    
+        return redirect('/posts/' . $post->id);
+    }
+    
+    
+    /**
+     * 編集画面呼び出し
+     */
+    public function edit(Post $post)//ここはURLで指定している記事番号のインスタンスが代入される
+    {
+        return view('posts.edit')->with(['post' => $post]);
     }
 
 

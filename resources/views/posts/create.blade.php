@@ -10,7 +10,7 @@
             @csrf
             <div class="title">
                 <h2>Title</h2>
-                <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/><!--oldは直前の入力値を取得する関数-->
+                <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>{{--oldは直前の入力値を取得する関数--}}
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
             </div>
             </div>
